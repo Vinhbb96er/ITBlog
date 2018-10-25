@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <head>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <!-- bootstrap-css -->
+   <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+   <!-- bootstrap-css -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="{{ asset('js/app.js') }}" defer></script>
    <!-- //bootstrap-css -->
@@ -15,6 +14,7 @@
    <link rel="stylesheet" href="{{ asset('css/font.css') }}" type="text/css"/>
    <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
    <!-- //font-awesome icons -->
+   <script src="js/jquery2.0.3.min.js"></script>
 </head>
 <body>
    <div class="log-w3">
@@ -72,8 +72,9 @@
                                         <button type="submit" class="btn btn-primary">
                                             {{ __('Login') }}
                                         </button>
-                                        <a class="btn btn-link" href="{{ route('register') }}">
-                                            {{ __('Register') }}
+
+                                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                                            {{ __('Forgot Your Password?') }}
                                         </a>
                                     </div>
                                 </div>
@@ -84,11 +85,10 @@
             </div>
         </div>
    </div>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-   <script src="{{ asset('js/jquery.dcjqaccordion.2.7.js') }}"></script>
-   <script src="{{ asset('js/scripts.js') }}"></script>
-   <script src="{{ asset('js/jquery.slimscroll.js') }}"></script>
-   <script src="{{ asset('js/jquery.nicescroll.js') }}"></script>
-   <script src="{{ asset('js/jquery.scrollTo.js') }}"></script>
+   <script src="js/jquery.dcjqaccordion.2.7.js"></script>
+   <script src="js/scripts.js"></script>
+   <script src="js/jquery.slimscroll.js"></script>
+   <script src="js/jquery.nicescroll.js"></script>
+   <script src="js/jquery.scrollTo.js"></script>
 </body>
 </html>
