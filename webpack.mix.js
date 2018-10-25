@@ -15,4 +15,9 @@ mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css')
    .copy('resources/assets/admin/css', 'public/admin/css')
    .copy('resources/assets/admin/images', 'public/admin/images')
-   .copy('resources/assets/admin/js', 'public/admin/js');
+   .copy('resources/assets/admin/js', 'public/admin/js')
+
+   .copyDirectory('resources/assets/js', 'public/js')
+   .copyDirectory('resources/assets/css', 'public/css')
+   .copyDirectory('resources/assets/images/', 'public/images')
+   .copyDirectory('resources/assets/fonts/', 'public/fonts');
