@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
+use App\Models\Category;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $newestCategories = Category::orderBy('created_at', 'desc')->limit(3)->with([
+            'posts'])->get();
+
+
+        return view('home.home', compact(['newestCategories']));
     }
 }

@@ -14,6 +14,7 @@ class Post extends Model
         'content',
         'total_view',
         'total_like',
+        'image'
     ];
 
     public function user() 

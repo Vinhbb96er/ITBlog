@@ -46,6 +46,7 @@ $factory->define(App\Models\Post::class, function (Faker $faker) {
         'content' => $faker->paragraph(2),
         'total_view' => $faker->randomDigit(),
         'total_like'=> $faker->randomDigit(),
+        'image' => 'images/m2.jpg',
     ];
 });
 
