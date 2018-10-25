@@ -7,15 +7,15 @@
 <meta name="keywords" content="Style Blog Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <script type="applijewelleryion/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- Custom Theme files -->
 <link href='//fonts.googleapis.com/css?family=Raleway:400,600,700' rel='stylesheet' type='text/css'>
-<link href="css/style.css" rel='stylesheet' type='text/css' />  
-<script src="js/jquery-1.11.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<link href="/css/style.css" rel='stylesheet' type='text/css' />  
+<script src="/js/jquery-1.11.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 <!-- animation-effect -->
-<link href="css/animate.min.css" rel="stylesheet"> 
-<script src="js/wow.min.js"></script>
+<link href="/css/animate.min.css" rel="stylesheet"> 
+<script src="/js/wow.min.js"></script>
 <script>
  new WOW().init();
 </script>
@@ -55,11 +55,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <nav class="link-effect-7" id="link-effect-7">
                         <ul class="nav navbar-nav">
                             <li class="active act"><a href="index.html">Home</a></li>
+                            @auth
+                                <li><a href="{{ route('post.create') }}">Create post</a></li>
+                            @endauth
                             <li><a href="about.html">About</a></li>
                             <li><a href="features.html">Features</a></li>
-                            <li><a href="travel.html">Travel</a></li>
                             <li><a href="fashion.html">Fashion</a></li>
-                            <li><a href="music.html">Music</a></li>
                             <li><a href="codes.html">Codes</a></li>
                             <li><a href="contact.html">Contact</a></li>
                         </ul>
@@ -68,16 +69,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <!-- /.navbar-collapse -->
             </nav>
             </div>
-            <div class="nav navbar-nav navbar-right social-icons wow fadeInRight animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
-                    <ul>
-                        <li><a href="#"> </a></li>
-                        <li><a href="#" class="pin"> </a></li>
-                        <li><a href="#" class="in"> </a></li>
-                        <li><a href="#" class="be"> </a></li>
-                        
-                        <li><a href="#" class="vimeo"> </a></li>
+            <div class="nav navbar-nav navbar-right">
+                <nav class="link-effect-7" id="link-effect-7">
+                    <ul class="nav navbar-nav">
+                        @auth
+                            <li class="active"><a href="" style="text-transform: lowercase;">{{ Auth::user()->email }}</a></li>
+                            <li class="active">
+                                <a style="text-transform: lowercase;" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
+                        @else
+                            <li class="active"><a href="{{ route('login') }}" style="text-transform: lowercase;">Login</a></li>
+                        @endauth
                     </ul>
-                </div>
+                </nav>
+            </div>
             <div class="clearfix"> </div>   
         </div>
     </div>

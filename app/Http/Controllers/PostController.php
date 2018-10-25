@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Category;
 use Auth;
+use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
@@ -25,7 +27,13 @@ class PostController extends Controller
      */
     public function create()
     {
-        // return view('post.create');
+        if (Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        $categories = Category::pluck('name', 'id');
+
+        return view('home.post-blog', compact('categories'));
     }
 
     /**
@@ -34,19 +42,30 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        $data = $request->only(
-            'title',
-            'preview',
-            'content',
-            'category_id'
-        );
+        if (Auth::check()) {
+            return redirect()->route('login');
+        }
+        
+        try {
+             $data = $request->only(
+                'title',
+                'preview',
+                'content',
+                'category_id'
+            );
 
-        $data['total_view'] = 0;
-        $data['total_like'] = 0;
+            $data['total_view'] = 0;
+            $data['total_like'] = 0;
+            $data['image'] = 0;
 
-        Auth::user()->post()->create($data);
+            Auth::user()->posts()->create($data);
+
+            return redirect()->back()->with('success', 'Post success!');
+        } catch(Exception $e) {
+            return redirect()->back()->with('error', 'Post fail!');
+        }
     }
 
     /**
