@@ -27,7 +27,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        if (Auth::check()) {
+        if (!Auth::check()) {
             return redirect()->route('login');
         }
 
@@ -44,7 +44,7 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        if (Auth::check()) {
+        if (!Auth::check()) {
             return redirect()->route('login');
         }
         
