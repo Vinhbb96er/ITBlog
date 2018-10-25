@@ -24,21 +24,22 @@
                 <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
                     <ul id="myTab" class="nav nav-tabs" role="tablist">
                         @foreach ($newestCategories as $category)
-                            <li role="presentation" class="active"><a href="#cate-{{ $category->id }}" id="expeditions-tab" role="tab" data-toggle="tab" aria-controls="expeditions" aria-expanded="true">
+                            <li role="presentation" class="{{ $loop->iteration == 1 ? 'active' : '' }}"><a href="#cate-{{ $category->id }}" id="expeditions-tab" role="tab" data-toggle="tab" aria-controls="expeditions" aria-expanded="true">
                                 {{ $category->name }}
                             </a></li>
                         @endforeach
                     </ul>
                     <div id="myTabContent" class="tab-content">
                         @foreach ($newestCategories as $category)
-                            
                             <div role="tabpanel" class="tab-pane {{ $loop->iteration == 1 ? 'active' : 'fade' }}" id="cate-{{ $category->id }}" aria-labelledby="expeditions-tab">
                                 @foreach($category->posts as $post)
                                     @if ($loop->iteration == 4)
                                         @break
                                     @endif
                                     <div class="col-md-4 col-sm-5 tab-image">
-                                        <img src="{{ $post->image }}" class="img-responsive" alt="Wanderer">
+                                        <a href="">
+                                            <img src="{{ $post->image }}" class="img-responsive" alt="Wanderer">
+                                        </a>
                                     </div>
                                 @endforeach
                                 <div class="clearfix"></div>
@@ -59,149 +60,85 @@
              <div class="tc-ch wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
                 
                     <div class="tch-img">
-                        <a href="singlepage.html"><img src="images/t4.jpg" class="img-responsive" alt=""></a>
+                        <a href="{{ route('post.show', $postsTopLike->first()->id) }}"><img width="734px" height="343px" src="{{ $postsTopLike->first()->image }}" class="img-responsive" alt=""></a>
                     </div>
                     
-                    <h3><a href="singlepage.html">Lorem Ipsum is simply</a></h3>
-                    <h6>BY <a href="singlepage.html">ADAM ROSE </a>JULY 10 2016.</h6>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud eiusmod tempor incididunt ut labore et dolore magna aliqua exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <p>Ut enim ad minim veniam, quis nostrud eiusmod tempor incididunt ut labore et dolore magna aliqua exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <div class="bht1">
-                            <a href="singlepage.html">Continue Reading</a>
-                        </div>
-                        <div class="soci">
-                            <ul>
-                                <li class="hvr-rectangle-out"><a class="fb" href="#"></a></li>
-                                <li class="hvr-rectangle-out"><a class="twit" href="#"></a></li>
-                                <li class="hvr-rectangle-out"><a class="goog" href="#"></a></li>
-                                <li class="hvr-rectangle-out"><a class="pin" href="#"></a></li>
-                                <li class="hvr-rectangle-out"><a class="drib" href="#"></a></li>
-                            </ul>
-                        </div>
-                        <div class="clearfix"></div>
+                    <h3><a href="{{ route('post.show', $postsTopLike->first()->id) }}">{{ $postsTopLike->first()->title }}</a></h3>
+                    <h6>BY <a href="#">{{ $postsTopLike->first()->user()->first()->info->full_name }} </a> {{ $postsTopLike->first()->created_at }}.</h6>
+                        <p>{{ $postsTopLike->first()->preview }}</p>
+                    <div class="bht1">
+                        <a href="{{ route('post.show', $postsTopLike->first()->id) }}">Continue Reading</a>
+                    </div>
+                    <div class="soci">
+                        <ul>
+                            <li>{{ $postsTopLike->first()->total_view }} <span class="fab fas fa-eye" style="font-size: 24px;"></span></li>
+                            <li>{{ $postsTopLike->first()->total_like }} <span class="fas fa-thumbs-up" style="font-size: 24px;"></span></li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
             </div>
             <div class="clearfix"></div>
             <!-- technology-top -->
             <!-- technology-top -->
             <div class="w3ls">
-                <div class="col-md-6 w3ls-left wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
-                     <div class="tc-ch">
-                        <div class="tch-img">
-                            <a href="singlepage.html">
-                            <img src="images/m4.jpg" class="img-responsive" alt=""></a>
+                @php
+                    $postsTopLike->shift()
+                @endphp
+                @foreach ($postsTopLike as $post)
+                    <div class="col-md-6 w3ls-left wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
+                         <div class="tc-ch">
+                            <div class="tch-img">
+                                <a href="{{ route('post.show', $post->id) }}">
+                                <img src="{{ $post->image }}" class="img-responsive" alt=""></a>
+                            </div>
+                        
+                            <h3><a href="{{ route('post.show', $post->id) }}">{{ $post->title }}</a></h3>
+                            <h6>BY <a href="">{{ $post->user()->first()->info->full_name }}</a> {{ $post->created_at }}</h6>
+                                <p>{{ str_limit($post->preview, 100, '...') }}</p>
+                                <div class="bht1">
+                                    <a href="{{ route('post.show', $post->id) }}">Read More</a>
+                                </div>
+                                <div class="soci">
+                                    <ul>
+                                        <li>{{ $post->total_view }} <span class="fab fas fa-eye" style="font-size: 24px;"></span></li>
+                                        <li>{{ $post->total_like }} <span class="fas fa-thumbs-up" style="font-size: 24px;"></span></li>
+                                    </ul>
+                                </div>
+                                <div class="clearfix"></div>
                         </div>
-                    
-                        <h3><a href="singlepage.html">Lorem Ipsum is simply</a></h3>
-                        <h6>BY <a href="singlepage.html">ADAM ROSE </a>JULY 10 2016.</h6>
-                            <p>Ut enim ad minim veniam, quis nostrud eiusmod tempor incididunt ut labore et dolore magna aliqua exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                            <div class="bht1">
-                                <a href="singlepage.html">Read More</a>
-                            </div>
-                            <div class="soci">
-                                <ul>
-                                    <li class="hvr-rectangle-out"><a class="fb" href="#"></a></li>
-                                    <li class="hvr-rectangle-out"><a class="pin" href="#"></a></li>
-                                </ul>
-                            </div>
-                            <div class="clearfix"></div>
                     </div>
-                </div>
-                <div class="col-md-6 w3ls-left wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
-                     <div class="tc-ch">
-                        <div class="tch-img">
-                            <a href="singlepage.html"><img src="images/m5.jpg" class="img-responsive" alt=""></a>
-                        </div>
-                    
-                        <h3><a href="singlepage.html">Lorem Ipsum is simply</a></h3>
-                        <h6>BY <a href="singlepage.html">ADAM ROSE </a>JULY 10 2016.</h6>
-                            <p>Ut enim ad minim veniam, quis nostrud eiusmod tempor incididunt ut labore et dolore magna aliqua exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                            <div class="bht1">
-                                <a href="singlepage.html">Read More</a>
-                            </div>
-                            <div class="soci">
-                                <ul>
-                                    <li class="hvr-rectangle-out"><a class="twit" href="#"></a></li>
-                                    <li class="hvr-rectangle-out"><a class="drib" href="#"></a></li>
-                                </ul>
-                            </div>
-                            <div class="clearfix"></div>
-                    </div>
-                </div>
+                @endforeach
                 <div class="clearfix"></div>
             </div>
             <!-- technology-top -->
-            <div class="wthree">
-                 <div class="col-md-6 wthree-left wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
-                    <div class="tch-img">
-                            <a href="singlepage.html"><img src="images/f1.jpg" class="img-responsive" alt=""></a>
-                        </div>
-                 </div>
-                 <div class="col-md-6 wthree-right wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
-                        <h3><a href="singlepage.html">Lorem Ipsum is simply</a></h3>
-                        <h6>BY <a href="singlepage.html">ADAM ROSE </a>JULY 10 2016.</h6>
-                            <p>Ut enim ad minim veniam, quis nostrud eiusmod tempor incididunt ut labore et dolore magna aliqua exercitation ullamco laboris .</p>
-                            <div class="bht1">
-                                <a href="singlepage.html">Read More</a>
+            @foreach($posts as $post)
+                <div class="wthree">
+                     <div class="col-md-6 wthree-left wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
+                        <div class="tch-img">
+                                <a href="{{ route('post.show', $post->id) }}"><img src="{{ $post->image }}" class="img-responsive" alt=""></a>
                             </div>
-                            <div class="soci">
-                                <ul>
-                                    
-                                    <li class="hvr-rectangle-out"><a class="twit" href="#"></a></li>
-                                    <li class="hvr-rectangle-out"><a class="pin" href="#"></a></li>
-                                </ul>
-                            </div>
-                            <div class="clearfix"></div>
-                    
-                 </div>
-                    <div class="clearfix"></div>
-            </div>
-            <div class="wthree">
-                 <div class="col-md-6 wthree-left wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
-                    <div class="tch-img">
-                            <a href="singlepage.html"><img src="images/f2.jpg" class="img-responsive" alt=""></a>
-                        </div>
-                 </div>
-                 <div class="col-md-6 wthree-right wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
-                        <h3><a href="singlepage.html">Lorem Ipsum is simply</a></h3>
-                        <h6>BY <a href="singlepage.html">ADAM ROSE </a>JULY 10 2016.</h6>
-                            <p>Ut enim ad minim veniam, quis nostrud eiusmod tempor incididunt ut labore et dolore magna aliqua exercitation ullamco laboris .</p>
-                            <div class="bht1">
-                                <a href="singlepage.html">Read More</a>
-                            </div>
-                            <div class="soci">
-                                <ul>
-                                    <li class="hvr-rectangle-out"><a class="goog" href="#"></a></li>                                    
-                                    <li class="hvr-rectangle-out"><a class="fb" href="#"></a></li>
-                                </ul>
-                            </div>
-                            <div class="clearfix"></div>
-                    
-                 </div>
-                    <div class="clearfix"></div>
-            </div>
-            <div class="wthree">
-                 <div class="col-md-6 wthree-left wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
-                    <div class="tch-img">
-                            <a href="singlepage.html"><img src="images/f3.jpg" class="img-responsive" alt=""></a>
-                        </div>
-                 </div>
-                 <div class="col-md-6 wthree-right wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
-                        <h3><a href="singlepage.html">Lorem Ipsum is simply</a></h3>
-                        <h6>BY <a href="singlepage.html">ADAM ROSE </a>JULY 10 2016.</h6>
-                            <p>Ut enim ad minim veniam, quis nostrud eiusmod tempor incididunt ut labore et dolore magna aliqua exercitation ullamco laboris.</p>
-                            <div class="bht1">
-                                <a href="singlepage.html">Read More</a>
-                            </div>
-                            <div class="soci">
-                                <ul>
-                                    <li class="hvr-rectangle-out"><a class="drib" href="#"></a></li>
-                                    <li class="hvr-rectangle-out"><a class="goog" href="#"></a></li>
-                                </ul>
-                            </div>
-                            <div class="clearfix"></div>
-                    
-                 </div>
-                    <div class="clearfix"></div>
+                     </div>
+                     <div class="col-md-6 wthree-right wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
+                            <h3><a href="{{ route('post.show', $post->id) }}">{{ $post->title }}</a></h3>
+                            <h6>BY <a href="#">{{ $post->user()->first()->info->full_name }} </a>{{ $post->created_at }}.</h6>
+                                <p>{{ str_limit($post->preview, 100, '...') }}</p>
+                                <div class="bht1">
+                                    <a href="{{ route('post.show', $post->id) }}">Read More</a>
+                                </div>
+                                <div class="soci">
+                                    <ul>
+                                        <li>{{ $post->total_view }} <span class="fab fas fa-eye" style="font-size: 24px;"></span></li>
+                                        <li>{{ $post->total_like }} <span class="fas fa-thumbs-up" style="font-size: 24px;"></span></li>
+                                    </ul>
+                                </div>
+                                <div class="clearfix"></div>
+                        
+                     </div>
+                        <div class="clearfix"></div>
+                </div>
+            @endforeach
+            <div class="col-lg-10 col-lg-offset-1">
+                {{ $posts->links() }}
             </div>
             </div>
         </div>
@@ -218,57 +155,19 @@
                                 <input type="submit" value=" ">
                             </form>
                         </div>
-                    <h4>Popular Posts </h4>
-                        <div class="blog-grids wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
-                            <div class="blog-grid-left">
-                                <a href="singlepage.html"><img src="images/t2.jpg" class="img-responsive" alt=""></a>
+                    <h4>Most View Posts </h4>
+                        @foreach ($postsTopView as $post)
+                            <div class="blog-grids wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
+                                <div class="blog-grid-left">
+                                    <a href="{{ route('post.show', $post->id) }}"><img src="{{ $post->image }}" class="img-responsive" alt=""></a>
+                                </div>
+                                <div class="blog-grid-right">
+                                    
+                                    <h5><a href="{{ route('post.show', $post->id) }}">{{ str_limit($post->title, 25, '...') }}</a> </h5>
+                                </div>
+                                <div class="clearfix"> </div>
                             </div>
-                            <div class="blog-grid-right">
-                                
-                                <h5><a href="singlepage.html">Pellentesque dui Maecenas male</a> </h5>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="blog-grids wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
-                            <div class="blog-grid-left">
-                                <a href="singlepage.html"><img src="images/m2.jpg" class="img-responsive" alt=""></a>
-                            </div>
-                            <div class="blog-grid-right">
-                                
-                                <h5><a href="singlepage.html">Pellentesque dui Maecenas male</a> </h5>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="blog-grids wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
-                            <div class="blog-grid-left">
-                                <a href="singlepage.html"><img src="images/f2.jpg" class="img-responsive" alt=""></a>
-                            </div>
-                            <div class="blog-grid-right">
-                                
-                                <h5><a href="singlepage.html">Pellentesque dui Maecenas male</a> </h5>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="blog-grids wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
-                            <div class="blog-grid-left">
-                                <a href="singlepage.html"><img src="images/t3.jpg" class="img-responsive" alt=""></a>
-                            </div>
-                            <div class="blog-grid-right">
-                                
-                                <h5><a href="singlepage.html">Pellentesque dui Maecenas male</a> </h5>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="blog-grids wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
-                            <div class="blog-grid-left">
-                                <a href="singlepage.html"><img src="images/m3.jpg" class="img-responsive" alt=""></a>
-                            </div>
-                            <div class="blog-grid-right">
-                                
-                                <h5><a href="singlepage.html">Pellentesque dui Maecenas male</a> </h5>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
+                        @endforeach
                         <div class="insta wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
                     <h4>Instagram</h4>
                         <ul>
@@ -292,12 +191,7 @@
                         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
                     </div>
                     </div>
-                    
-                    
-                    
                 </div>
-                
-            
         </div>
         <div class="clearfix"></div>
         <!-- technology-right -->
