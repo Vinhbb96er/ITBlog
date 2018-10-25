@@ -13,6 +13,6 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css')
-   .copy('resources/assets/css', 'public/css')
-   .copy('resources/assets/images', 'public/images')
-   .copy('resources/assets/js', 'public/js');
+   .copy('resources/assets/admin/css', 'public/admin/css')
+   .copy('resources/assets/admin/images', 'public/admin/images')
+   .copy('resources/assets/admin/js', 'public/admin/js');
