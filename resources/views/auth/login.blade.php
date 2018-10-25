@@ -14,6 +14,13 @@
    <!-- font-awesome icons -->
    <link rel="stylesheet" href="{{ asset('admin/css/font.css') }}" type="text/css"/>
    <link href="{{ asset('admin/css/font-awesome.css') }}" rel="stylesheet">
+   <style type="text/css">
+       .error {
+            width: 100% !important;
+            font-size: 12px !important;
+            color: #ff0000bd !important;
+        }
+   </style>
    <!-- //font-awesome icons -->
 </head>
 <body>
@@ -29,8 +36,8 @@
                         <input id="email" type="email" class="ggg{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="E-MAIL" value="{{ old('email') }}" required autofocus>
 
                         @if ($errors->has('email'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('email') }}</strong>
+                            <span class="error" role="alert">
+                                {{ $errors->first('email') }}
                             </span>
                         @endif
                     </div>
@@ -40,7 +47,7 @@
 
                         @if ($errors->has('password'))
                             <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('password') }}</strong>
+                                {{ $errors->first('password') }}
                             </span>
                         @endif
                     </div>
