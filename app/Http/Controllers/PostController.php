@@ -83,6 +83,8 @@ class PostController extends Controller
             $relarePosts = Post::where('category_id', $post->category->id)->where('id', '<>', $id)->limit(5)->get();
             $comments = $post->comments()->orderBy('created_at', 'desc')->get();
 
+            $post->update(['total_view' => $post->total_view + 1]);
+
             return view('home.detail-post', compact('post', 'relarePosts', 'comments'));
         } catch(Exception $e) {
             abort(404);
@@ -144,10 +146,24 @@ class PostController extends Controller
 
             Comment::create($data);
 
-            return redirect()->back()->with('success', 'Post success!');
+            return redirect()->back()->with('success', 'Comment success!');
         } catch(Exception $e) {
-            dd($e);
-            return redirect()->back()->with('error', 'Post fail!');
+            return redirect()->back()->with('error', 'Comment fail!');
+        }
+    }
+
+    public function like($id) {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+        
+        try {
+            $post = Post::find($id);
+            $post->update(['total_like' => $post->total_like + 1]);
+
+            return redirect()->back();
+        } catch(Exception $e) {
+            return redirect()->back();
         }
     }
 }

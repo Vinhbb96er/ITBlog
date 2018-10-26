@@ -23,6 +23,8 @@ Route::resource('post', 'PostController');
 
 Route::post('comment/create/{id}', 'PostController@createComment')->name('create-comment');
 
+Route::get('like/{id}', 'PostController@like')->name('like');
+
 // Route::group(['middware' => 'auth'], function () {
 //     Route::resource('post');
 // });

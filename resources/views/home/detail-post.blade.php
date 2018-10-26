@@ -21,7 +21,7 @@
                     <div class="b-bottom">
                         <h5 class="top">{{ $post->preview }}</h5>
                         <p class="sub">{{ $post->content }}</p>
-                        <p>{{ $post->created_at }}<a class="span_link" href="#"><span class="glyphicon glyphicon-thumbs-up"></span>{{ $post->total_like }} </a><a class="span_link" href="#"><span class="glyphicon glyphicon-eye-open"></span>{{ $post->total_view }}</a></p>
+                        <p>{{ $post->created_at }}<a class="span_link" href="{{ route('like', $post->id) }}"><span class="glyphicon glyphicon-thumbs-up"></span>{{ $post->total_like }} </a><a class="span_link" href="#"><span class="glyphicon glyphicon-eye-open"></span>{{ $post->total_view }}</a></p>
                     </div>
                 </div>
                 <div class="response">
