@@ -16,7 +16,21 @@
     <div class="container">
         <div class="col-md-16">
             <div class="contact-section">
-                <h2 class="w3">CREATE POST</h2>             
+                <h2 class="w3">CREATE POST</h2>
+                @if (Session::has('success'))
+                    <div>
+                        <div class="alert alert-success">
+                            {{ Session::get('success') }}
+                        </div>
+                    </div>   
+                @endif          
+                @if (Session::has('error'))
+                    <div>
+                        <div class="alert alert-danger">
+                            {{ Session::get('error') }}
+                        </div>
+                    </div>  
+                @endif      
                     <div class="contact-grids">
                         <div class="contact-grid">
                             {{ Form::open(['route' => 'post.store', 'method' => 'POST']) }}
