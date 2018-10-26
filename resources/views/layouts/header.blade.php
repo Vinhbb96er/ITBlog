@@ -21,6 +21,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
  new WOW().init();
 </script>
 <!-- //animation-effect -->
+
+<style type="text/css">
+    .no-result {
+        padding: 2em 2em 0 2em;
+        text-align: center;
+        color: #137ef3;
+        text-shadow: 2px 2px #a29c99;
+        font-size: 50px;
+    }
+
+    .img-list {
+        height: 220px !important;
+    }
+</style>
 </head>
 <body>
 <div class="header" id="ban">
@@ -56,7 +70,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <nav class="link-effect-7" id="link-effect-7">
                         <ul class="nav navbar-nav">
                             <li class="active act"><a href="{{ route('home') }}">Home</a></li>
-                            @foreach ($categories as $category)
+                            @foreach ($categoriesShare as $category)
                                 <li><a href="{{ route('category.show', $category->id) }}">{{ $category->name }}</a></li>
                             @endforeach
                             @auth
@@ -69,9 +83,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </nav>
             </div>
 
-            <div class="nav navbar-nav navbar-right social-icons wow fadeInRight animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
+            <div class="nav navbar-nav navbar-right social-icons wow fadeInRight animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight; float: right !important;">
                 @auth
-                    <label>{{ str_limit(Auth::user()->info()->first()->full_name, 15) }}</label>
+                    <label>{{ (Auth::user()->info) ? Auth::user()->info->full_name : Auth::user()->email }}</label>
                     <a class="btn btn-1 btn-danger"href="{{ route('logout') }}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -89,7 +103,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="container">
             <div class="logo">
                 <h1><a href="{{ route('home') }}">IT BLOG</a></h1>
-                <p><label class="of"></label>LET'S MAKE A PERFECT STYLE<label class="on"></label></p>
+                <p><label class="of"></label>LET'S MAKE A PERFECT BLOG<label class="on"></label></p>
             </div>
         </div>
     </div>

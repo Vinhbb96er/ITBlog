@@ -4,7 +4,8 @@
 
 <div class="banner">
 <div class="container"> 
-        <h2>Contrary to popular belief, Lorem Ipsum simply</h2>
+        <h2>A project make by <span style="color: #91d810;
+            text-shadow: 2px 2px #a29c99;"><b>Mini 14</b></span> team</h2>
         <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
     </div>
 </div>
@@ -28,7 +29,7 @@
                                     @endif
                                     <div class="col-md-4 col-sm-5 tab-image">
                                         <a href="{{ route('post.show', $post->id) }}">
-                                            <img src="{{ asset($post->image) }}" class="img-responsive" alt="Wanderer">
+                                            <img src="{{ asset($post->image) }}" class="img-responsive img-list" width="350px" alt="Wanderer">
                                         </a>
                                     </div>
                                 @endforeach
@@ -105,7 +106,7 @@
                 <div class="wthree">
                      <div class="col-md-6 wthree-left wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
                         <div class="tch-img">
-                                <a href="{{ route('post.show', $post->id) }}"><img src="{{ asset($post->image) }}" class="img-responsive" alt=""></a>
+                                <a href="{{ route('post.show', $post->id) }}"><img src="{{ asset($post->image) }}" class="img-responsive img-list" alt=""></a>
                             </div>
                      </div>
                      <div class="col-md-6 wthree-right wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">

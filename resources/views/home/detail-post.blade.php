@@ -1,15 +1,5 @@
 @extends('layouts.master')
 @section('content')
-<div class="header-bottom">
-    <div class="container">
-        <div class="logo">
-            <h1><a href="index.html">IT BLOG</a></h1>
-            <p><label class="of"></label>LET'S MAKE A PERFECT BLOG<label class="on"></label></p>
-        </div>
-    </div>
-</div>
-<div class="banner-1">
-</div>
 <!-- technology-left -->
 <div class="technology">
     <div class="container">
@@ -17,11 +7,11 @@
             <div class="agileinfo">
                 <h2 class="w3">{{ $post->title }}</h2>
                 <div class="single">
-                    <img src="{{ asset($post->image) }}" class="img-responsive" alt="">
+                    <img width="100%" src="{{ asset($post->image) }}" class="img-responsive" alt="">
                     <div class="b-bottom">
                         <h5 class="top">{{ $post->preview }}</h5>
                         <p class="sub">{{ $post->content }}</p>
-                        <p>{{ $post->created_at }}<a class="span_link" href="{{ route('like', $post->id) }}"><span class="glyphicon glyphicon-thumbs-up"></span>{{ $post->total_like }} </a><a class="span_link" href="#"><span class="glyphicon glyphicon-eye-open"></span>{{ $post->total_view }}</a></p>
+                        <p>{{ $post->created_at }}<a class="span_link" href="{{ route('like', $post->id) }}"><span class="glyphicon glyphicon-thumbs-up" style="font-size: 15px;"></span>{{ $post->total_like }} </a><a class="span_link" href="#"><span class="glyphicon glyphicon-eye-open" style="font-size: 15px;"></span>{{ $post->total_view }}</a></p>
                     </div>
                 </div>
                 <div class="response">
