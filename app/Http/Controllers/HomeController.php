@@ -39,4 +39,18 @@ class HomeController extends Controller
             'posts',
         ]));
     }
+
+    public function search(Request $request) 
+    {
+        $searchVal = $request->search_value;
+
+        $query = Post::where('title', 'like', "%$searchVal%")
+            ->orWhere('preview', 'like', "%$searchVal%");
+
+        $posts = $query->paginate(6);
+        $total = $query->count();
+        $postsTopView = Post::orderBy('total_view', 'desc')->take(5)->get();
+
+        return view('home.search', compact('posts', 'total', 'postsTopView'));
+    }
 }
