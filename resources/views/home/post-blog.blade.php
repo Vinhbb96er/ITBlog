@@ -1,14 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="header-bottom">
-    <div class="container">
-        <div class="logo">
-            <h1><a href="index.html">IT BLOG</a></h1>
-            <p><label class="of"></label>LET'S MAKE A PERFECT BLOG<label class="on"></label></p>
-        </div>
-    </div>
-</div>
 <div class="banner-1">
 
 </div>

@@ -30,7 +30,7 @@ class HomeController extends Controller
 
         $postsTopLike = Post::orderBy('total_like', 'desc')->take(3)->get();
         $postsTopView = Post::orderBy('total_view', 'desc')->take(5)->get();
-        $posts = Post::paginate(5);
+        $posts = Post::orderBy('created_at', 'desc')->paginate(5);
 
         return view('home.home', compact([
             'newestCategories', 

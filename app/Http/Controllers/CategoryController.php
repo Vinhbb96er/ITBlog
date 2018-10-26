@@ -49,7 +49,7 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
 
-        $posts = Post::where('category_id', $category->id)->paginate(6);
+        $posts = Post::where('category_id', $category->id)->orderBy('created_at', 'desc')->paginate(6);
         $postsTopView = Post::orderBy('total_view', 'desc')->take(5)->get();
 
         return view('home.category', compact('category', 'posts', 'postsTopView'));

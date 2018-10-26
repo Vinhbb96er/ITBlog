@@ -34,7 +34,7 @@
                     @csrf
 
                     <div>
-                        <input id="name" type="text" class="ggg{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus placeholder="NAME">
+                        <input id="name" type="text" class="ggg{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus placeholder="NAME" required>
 
                         @if ($errors->has('name'))
                             <span class="error" role="alert">

@@ -1,16 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-    <style type="text/css">
-        .no-result {
-            padding: 2em 2em 0 2em;
-            text-align: center;
-            color: #137ef3;
-            text-shadow: 2px 2px #a29c99;
-            font-size: 50px;
-        }
-    </style>
-
     <!-- technology-left -->
     <div class="technology">
     <div class="container">
@@ -28,12 +18,12 @@
                     @foreach ($postRow as $post)
                         <div class="col-md-6 blog-grid">
                             <div class="blog-grid-left1">
-                                <a href="{{ route('post.show', $post->id) }}"><img src="{{ asset($post->image) }}" alt=" " class="img-responsive"></a>
+                                <a href="{{ route('post.show', $post->id) }}"><img src="{{ asset($post->image) }}" alt=" " class="img-responsive img-list"></a>
                             </div> 
                             <div class="blog-grid-right1">
-                                <a href="{{ route('post.show', $post->id) }}">{{ $post->title }}</a>
+                                <a href="{{ route('post.show', $post->id) }}">{{ str_limit($post->title, 50) }}</a>
                                 <h4>{{ $post->created_at }}</h4>
-                                <p>{{ $post->preview }}</p>
+                                <p>{{ str_limit($post->preview, 100) }}</p>
                             </div>
                             <div class="clearfix"> </div>
                             <div class="more m1">

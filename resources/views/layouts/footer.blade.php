@@ -12,11 +12,9 @@
         <h4>Latest Tweet</h4>
         <div class="mid-btm">
             <p>Sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod .</p>
-            <a href="https://w3layouts.com/">https://w3layouts.com/</a>
         </div>
         
             <p>Consectetur adipisicing Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod .</p>
-            <a href="https://w3layouts.com/">https://w3layouts.com/</a>
     
         </div>
         <div class="col-md-4 footer-right wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
@@ -39,7 +37,7 @@
     </div>
     <div class="copyright wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
                 <div class="container">
-                    <p>© 2016 Style Blog. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+                    <p>© 2018 Style Blog. All rights reserved | Design by <a href="">Mini 14 Team</a></p>
                 </div>
             </div>
 </body>
