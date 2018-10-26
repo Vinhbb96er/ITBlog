@@ -20,6 +20,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('post', 'PostController');
+Route::resource('category', 'CategoryController');
+
+Route::get('/search', 'HomeController@search')->name('search');
 
 Route::post('comment/create/{id}', 'PostController@createComment')->name('create-comment');
 

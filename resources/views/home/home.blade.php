@@ -1,16 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-    <!--start-main-->
-    <div class="header-bottom">
-        <div class="container">
-            <div class="logo wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
-                <h1><a href="index.html">IT BLOG</a></h1>
-                <p><label class="of"></label>LET'S MAKE A PERFECT BLOG<label class="on"></label></p>
-            </div>
-        </div>
-    </div>
-<!-- banner -->
 
 <div class="banner">
 <div class="container"> 
@@ -25,7 +15,7 @@
                     <ul id="myTab" class="nav nav-tabs" role="tablist">
                         @foreach ($newestCategories as $category)
                             <li role="presentation" class="{{ $loop->iteration == 1 ? 'active' : '' }}"><a href="#cate-{{ $category->id }}" id="expeditions-tab" role="tab" data-toggle="tab" aria-controls="expeditions" aria-expanded="true">
-                                {{ $category->name }}
+                                {{ ucwords($category->name) }}
                             </a></li>
                         @endforeach
                     </ul>
@@ -37,8 +27,8 @@
                                         @break
                                     @endif
                                     <div class="col-md-4 col-sm-5 tab-image">
-                                        <a href="">
-                                            <img src="{{ $post->image }}" class="img-responsive" alt="Wanderer">
+                                        <a href="{{ route('post.show', $post->id) }}">
+                                            <img src="{{ asset($post->image) }}" class="img-responsive" alt="Wanderer">
                                         </a>
                                     </div>
                                 @endforeach
@@ -89,7 +79,7 @@
                          <div class="tc-ch">
                             <div class="tch-img">
                                 <a href="{{ route('post.show', $post->id) }}">
-                                <img src="{{ $post->image }}" class="img-responsive" alt=""></a>
+                                <img src="{{ asset($post->image) }}" class="img-responsive" alt=""></a>
                             </div>
                         
                             <h3><a href="{{ route('post.show', $post->id) }}">{{ $post->title }}</a></h3>
@@ -115,7 +105,7 @@
                 <div class="wthree">
                      <div class="col-md-6 wthree-left wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
                         <div class="tch-img">
-                                <a href="{{ route('post.show', $post->id) }}"><img src="{{ $post->image }}" class="img-responsive" alt=""></a>
+                                <a href="{{ route('post.show', $post->id) }}"><img src="{{ asset($post->image) }}" class="img-responsive" alt=""></a>
                             </div>
                      </div>
                      <div class="col-md-6 wthree-right wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
@@ -150,16 +140,16 @@
                             
                     <div class="tech-btm">
                     <div class="search-1 wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
-                            <form action="#" method="post">
-                                <input type="search" name="Search" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" required="">
+                            {{ Form::open(['route' => 'search', 'method' => 'GET']) }}
+                                <input type="search" name="search_value" placeholder="Type something...">
                                 <input type="submit" value=" ">
-                            </form>
+                            {{ Form::close() }}
                         </div>
                     <h4>Most View Posts </h4>
                         @foreach ($postsTopView as $post)
                             <div class="blog-grids wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
                                 <div class="blog-grid-left">
-                                    <a href="{{ route('post.show', $post->id) }}"><img src="{{ $post->image }}" class="img-responsive" alt=""></a>
+                                    <a href="{{ route('post.show', $post->id) }}"><img src="{{ asset($post->image) }}" class="img-responsive" alt=""></a>
                                 </div>
                                 <div class="blog-grid-right">
                                     
@@ -172,15 +162,15 @@
                     <h4>Instagram</h4>
                         <ul>
                             
-                            <li><a href="singlepage.html"><img src="images/t1.jpg" class="img-responsive" alt=""></a></li>
-                            <li><a href="singlepage.html"><img src="images/m1.jpg" class="img-responsive" alt=""></a></li>
-                            <li><a href="singlepage.html"><img src="images/f1.jpg" class="img-responsive" alt=""></a></li>
-                            <li><a href="singlepage.html"><img src="images/m2.jpg" class="img-responsive" alt=""></a></li>
-                            <li><a href="singlepage.html"><img src="images/f2.jpg" class="img-responsive" alt=""></a></li>
-                            <li><a href="singlepage.html"><img src="images/t2.jpg" class="img-responsive" alt=""></a></li>
-                            <li><a href="singlepage.html"><img src="images/f3.jpg" class="img-responsive" alt=""></a></li>
-                            <li><a href="singlepage.html"><img src="images/t3.jpg" class="img-responsive" alt=""></a></li>
-                            <li><a href="singlepage.html"><img src="images/m3.jpg" class="img-responsive" alt=""></a></li>
+                            <li><a href="singlepage.html"><img src="/images/t1.jpg" class="img-responsive" alt=""></a></li>
+                            <li><a href="singlepage.html"><img src="/images/m1.jpg" class="img-responsive" alt=""></a></li>
+                            <li><a href="singlepage.html"><img src="/images/f1.jpg" class="img-responsive" alt=""></a></li>
+                            <li><a href="singlepage.html"><img src="/images/m2.jpg" class="img-responsive" alt=""></a></li>
+                            <li><a href="singlepage.html"><img src="/images/f2.jpg" class="img-responsive" alt=""></a></li>
+                            <li><a href="singlepage.html"><img src="/images/t2.jpg" class="img-responsive" alt=""></a></li>
+                            <li><a href="singlepage.html"><img src="/images/f3.jpg" class="img-responsive" alt=""></a></li>
+                            <li><a href="singlepage.html"><img src="/images/t3.jpg" class="img-responsive" alt=""></a></li>
+                            <li><a href="singlepage.html"><img src="/images/m3.jpg" class="img-responsive" alt=""></a></li>
                         </ul>
                     </div>
                     

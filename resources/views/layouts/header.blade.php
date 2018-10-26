@@ -24,17 +24,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 <div class="header" id="ban">
-        <div class="container">
+        <div class="container" style="margin: 0 0 0 50px; padding: 0;">
             <div class="head-left wow fadeInLeft animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
                 <div class="header-search">
                         <div class="search">
                             <input class="search_box" type="checkbox" id="search_box">
                             <label class="icon-search" for="search_box"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></label>
                             <div class="search_form">
-                                <form action="#" method="post">
-                                    <input type="text" name="Search" placeholder="Search...">
+                                {{ Form::open(['route' => 'search', 'method' => 'GET']) }}
+                                    <input type="text" name="search_value" placeholder="Search...">
                                     <input type="submit" value="Send">
-                                </form>
+                                {{ Form::close() }}
                             </div>
                         </div>
                 </div>
@@ -55,43 +55,41 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
                     <nav class="link-effect-7" id="link-effect-7">
                         <ul class="nav navbar-nav">
-                            <li class="active act"><a href="index.html">Home</a></li>
+                            <li class="active act"><a href="{{ route('home') }}">Home</a></li>
+                            @foreach ($categories as $category)
+                                <li><a href="{{ route('category.show', $category->id) }}">{{ $category->name }}</a></li>
+                            @endforeach
                             @auth
                                 <li><a href="{{ route('post.create') }}">Create post</a></li>
                             @endauth
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="features.html">Features</a></li>
-                            <li><a href="fashion.html">Fashion</a></li>
-                            <li><a href="codes.html">Codes</a></li>
-                            <li><a href="contact.html">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
                 <!-- /.navbar-collapse -->
             </nav>
             </div>
-            <div class="nav navbar-nav navbar-right">
-                <nav class="link-effect-7" id="link-effect-7">
-                    <ul class="nav navbar-nav">
-                        @auth
-                            <li class="active"><a href="" style="text-transform: lowercase;">{{ Auth::user()->email }}</a></li>
-                            <li class="active">
-                                <a style="text-transform: lowercase;" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </li>
-                        @else
-                            <li class="active"><a href="{{ route('login') }}" style="text-transform: lowercase;">Login</a></li>
-                        @endauth
-                    </ul>
-                </nav>
+            <div class="nav navbar-nav navbar-right social-icons wow fadeInRight animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
+                @auth
+                    <label>{{ str_limit(Auth::user()->info()->first()->full_name, 15) }}</label>
+                    <a class="btn btn-1 btn-danger"href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-1 btn-primary">Log in</a>
+                @endauth  
+                
             </div>
-            <div class="clearfix"> </div>   
+            <div class="clearfix"> </div> 
+        </div>
+    </div>
+    <div class="header-bottom">
+        <div class="container">
+            <div class="logo">
+                <h1><a href="{{ route('home') }}">IT BLOG</a></h1>
+                <p><label class="of"></label>LET'S MAKE A PERFECT STYLE<label class="on"></label></p>
+            </div>
         </div>
     </div>
